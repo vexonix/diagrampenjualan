@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Chart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f9;
+        }
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sales Chart</h1>
+        <p>Diagram penjualan per bulan selama setahun</p>
+        <canvas id="salesChart" width="400" height="200"></canvas>
+    </div>
+
+    <div class="container">
+        <h2>Sales Data Table</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Sales (in USD)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>January</td><td>1200</td></tr>
+                <tr><td>February</td><td>1900</td></tr>
+                <tr><td>March</td><td>3000</td></tr>
+                <tr><td>April</td><td>5000</td></tr>
+                <tr><td>May</td><td>2400</td></tr>
+                <tr><td>June</td><td>3200</td></tr>
+                <tr><td>July</td><td>4000</td></tr>
+                <tr><td>August</td><td>4500</td></tr>
+                <tr><td>September</td><td>3800</td></tr>
+                <tr><td>October</td><td>4100</td></tr>
+                <tr><td>November</td><td>4600</td></tr>
+                <tr><td>December</td><td>5000</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Data untuk diagram
+        const salesData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            datasets: [
+                {
+                    label: "Sales (in USD)",
+                    data: [1200, 1900, 3000, 5000, 2400, 3200, 4000, 4500, 3800, 4100, 4600, 5000],
+                    backgroundColor: "rgba(75, 192, 192, 0.2)",
+                    borderColor: "rgba(75, 192, 192, 1)",
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        // Konfigurasi diagram
+        const config = {
+            type: "bar", // tipe diagram (bar, line, pie, dll.)
+            data: salesData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Yearly Sales Data'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Render diagram
+        const ctx = document.getElementById("salesChart").getContext("2d");
+        new Chart(ctx, config);
+    </script>
+</body>
+</html>
